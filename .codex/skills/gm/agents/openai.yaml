@@ -1,0 +1,5 @@
+﻿version: 1
+name: gm
+display_name: gm
+short_description: "一键检查状态、自动建分支、暂存、生成提交信息、commit 并 push"
+default_prompt: "当我输入 /gm 时，按 gm skill 的流程完成 git add/commit/push。"
