@@ -1,0 +1,5 @@
+﻿version: 1
+name: pr
+display_name: pr
+short_description: "自动检查分支状态，生成 PR 标题/正文，并通过 gh/API 创建 PR"
+default_prompt: "当我输入 /pr 时，按 pr skill 的流程创建一个 PR。"
