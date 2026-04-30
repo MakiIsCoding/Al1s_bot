@@ -1,0 +1,15 @@
+# Local runtime and install artifacts
+.tmp-astrbot-download/
+AstrBot/.venv/
+AstrBot/__pycache__/
+AstrBot/**/*.pyc
+
+# AstrBot runtime data. Custom plugin source under data/plugins is allowed.
+AstrBot/data/*
+!AstrBot/data/plugins/
+!AstrBot/data/plugins/**
+
+# Logs and transient files
+*.log
+logs/
+run/

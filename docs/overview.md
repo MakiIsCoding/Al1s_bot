@@ -75,35 +75,39 @@ flowchart LR
 
 ```text
 /home/ubuntu/astrbot/
-  compose.yml
-  .env
-  data/
-  plugins/
-    astrbot_plugin_llmchat_agent/
-    astrbot_plugin_emoji/
-    astrbot_plugin_jmcomic/
-    astrbot_plugin_setu/
-    astrbot_plugin_summary/
-    astrbot_plugin_translate/
+  .codex/
+    skills/
+      gm/
+      pr/
   docs/
     overview.md
     deployment.md
     migration-map.md
     plugin-design.md
     operations.md
-  backups/
-  upstream/
+  AstrBot/
+    main.py
+    pyproject.toml
+    data/
+      plugins/
+        astrbot_plugin_llmchat_agent/
+        astrbot_plugin_emoji/
+        astrbot_plugin_jmcomic/
+        astrbot_plugin_setu/
+        astrbot_plugin_summary/
+        astrbot_plugin_translate/
+      plugin_data/
+      config/
 ```
 
 目录职责：
 
-- `compose.yml`：维护 AstrBot、Shipyard、可能的 NapCat/OneBot 相关容器。
-- `.env`：保存端口、访问令牌、镜像地址等非代码配置。模型 API Key 等敏感信息优先放 AstrBot WebUI 或受控配置，不写进公开文档。
-- `data/`：AstrBot 持久化数据，包括配置、数据库、插件数据等。
-- `plugins/`：我们从 botv1 迁移过来的自定义插件源码。
+- `.codex/`：Codex 自动化 skill，例如 `gm` 和 `pr`。
 - `docs/`：迁移和运维文档。
-- `backups/`：迁移前后数据快照。
-- `upstream/`：可选，用于放 AstrBot 官方仓库副本，便于参考 compose、插件模板和版本变更。
+- `AstrBot/`：官方 AstrBot 源码目录，当前由 PyPI 官方源码包 `astrbot==4.23.6` 解压得到。
+- `AstrBot/data/`：AstrBot 自己的持久化数据、配置、数据库和插件数据。
+- `AstrBot/data/plugins/`：我们从 botv1 迁移过来的自定义 AstrBot 插件源码。
+- `AstrBot/data/plugin_data/`：插件运行数据，避免写入插件源码目录。
 
 ## 4. 部署与使用方案
 
@@ -134,7 +138,7 @@ flowchart LR
 1. 创建项目目录：
 
 ```bash
-mkdir -p /home/ubuntu/astrbot/{data,plugins,docs,logs,run,backups,upstream}
+mkdir -p /home/ubuntu/astrbot/docs
 ```
 
 2. 选择部署模式：
@@ -146,9 +150,9 @@ mkdir -p /home/ubuntu/astrbot/{data,plugins,docs,logs,run,backups,upstream}
 
 3. 启动 AstrBot：
 
-- 从官方仓库 clone 源码到 `/home/ubuntu/astrbot/upstream/AstrBot`。
-- 优先用 `uv sync` 安装依赖，`uv run main.py` 启动。
-- 若 `uv` 不合适，则使用 Python venv 和 `requirements.txt`。
+- 将 PyPI 官方源码包 `astrbot==4.23.6` 解压到 `/home/ubuntu/astrbot/AstrBot`。
+- 使用 Python venv 和 `pip install -e .` 安装依赖。
+- 因 GitHub 当前不可用，将源码包自带的 `dashboard-artifact/unpacked/dist` 放到 `astrbot/dashboard/dist`，避免运行时下载 Dashboard。
 - 启动后访问 WebUI，默认账号密码需要立即修改。
 
 4. 配置模型：
@@ -169,7 +173,7 @@ mkdir -p /home/ubuntu/astrbot/{data,plugins,docs,logs,run,backups,upstream}
 
 - 在 AstrBot WebUI 创建 OneBot v11 机器人实例。
 - AstrBot 作为服务端监听 `0.0.0.0:6199`。
-- NapCat 或其他 OneBot 实现端作为客户端连接 `ws://127.0.0.1:6199/ws` 或 Docker 网络内的 `ws://astrbot:6199/ws`。
+- NapCat 或其他 OneBot 实现端作为客户端连接 `ws://127.0.0.1:6199/ws`，实际路径以 AstrBot WebUI 生成配置为准。
 
 ## 5. botv1 迁移方案
 
@@ -258,7 +262,7 @@ mkdir -p /home/ubuntu/astrbot/{data,plugins,docs,logs,run,backups,upstream}
 1. 先完整备份 `/home/ubuntu/botv1/data`、`/home/ubuntu/botv1/cache`、`.env`。
 2. 敏感配置不直接复制进文档或 Git 仓库。
 3. 表情包数据先以只读方式接入 AstrBot 插件，验证无误后再允许写入。
-4. 数据格式转换脚本放在 `/home/ubuntu/astrbot/plugins/<plugin>/scripts/` 或 `/home/ubuntu/astrbot/docs` 关联的迁移脚本目录。
+4. 数据格式转换脚本放在 `/home/ubuntu/astrbot/AstrBot/data/plugins/<plugin>/scripts/` 或 `/home/ubuntu/astrbot/docs` 关联的迁移脚本目录。
 
 ## 6. 切换方案
 
@@ -290,12 +294,12 @@ mkdir -p /home/ubuntu/astrbot/{data,plugins,docs,logs,run,backups,upstream}
 - 群聊场景噪声大，需要触发策略、冷却和权限控制。
 - 搜索能力依赖模型 function calling 和搜索源稳定性。
 - 图片/表情发送依赖平台适配器的媒体消息支持。
-- Docker、NapCat、AstrBot、插件各自都有数据持久化，备份策略要明确。
+- NapCat、AstrBot、插件各自都有数据持久化，备份策略要明确。
 - AstrBot 使用 AGPL-v3 许可证，若修改 AstrBot 本体并用于商业网络服务，需要注意开源义务。
 
 控制策略：
 
-- 默认不开启 local Computer Use，优先 sandbox。
+- 默认不开启 local Computer Use；如需开放，先做白名单、超时和审计。
 - 所有高风险工具需要白名单用户触发。
 - 每个工具设置超时、最大调用次数、参数校验和日志。
 - 群聊自动图片发送需要频率限制。
@@ -305,7 +309,7 @@ mkdir -p /home/ubuntu/astrbot/{data,plugins,docs,logs,run,backups,upstream}
 
 后续建议继续补充这些文档：
 
-- `deployment.md`：服务器 Docker Compose、端口、防火墙、WebUI、Shipyard、NapCat 接入。
+- `deployment.md`：服务器源码部署、端口、防火墙、WebUI、systemd、NapCat 接入。
 - `migration-map.md`：botv1 每个插件到 AstrBot 插件/工具/Skill 的映射。
 - `plugin-design.md`：`llmchat_agent`、`emoji`、`summary` 等插件的接口设计。
 - `security.md`：权限、沙盒、密钥、审计、群聊触发策略。
@@ -314,7 +318,6 @@ mkdir -p /home/ubuntu/astrbot/{data,plugins,docs,logs,run,backups,upstream}
 ## 9. 参考资料
 
 - AstrBot 官方介绍：https://docs.astrbot.app/what-is-astrbot.html
-- AstrBot Docker 部署：https://docs.astrbot.app/en/deploy/astrbot/docker.html
 - AstrBot 源码部署：https://docs.astrbot.app/en/deploy/astrbot/cli.html
 - AstrBot OneBot v11 接入：https://docs.astrbot.app/platform/aiocqhttp.html
 - AstrBot Agent Runner：https://docs.astrbot.app/use/agent-runner.html
