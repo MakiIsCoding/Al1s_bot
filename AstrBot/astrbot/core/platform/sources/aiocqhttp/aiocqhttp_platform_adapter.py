@@ -61,6 +61,13 @@ class AiocqhttpAdapter(Platform):
             ),  # 以防旧版本配置不存在
         )
 
+        # NapCat default reverse WebSocket path; aiocqhttp only registers /ws by default.
+        self.bot._server_app.add_websocket(
+            "/onebot/v11/ws",
+            strict_slashes=False,
+            view_func=self.bot._handle_wsr,
+        )
+
         @self.bot.on_request()
         async def request(event: Event) -> None:
             try:
