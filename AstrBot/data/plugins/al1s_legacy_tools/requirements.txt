@@ -1,0 +1,3 @@
+# Optional: the image super-resolution command uses Alibaba Cloud SDK.
+# Install manually with care because its dependency resolver may downgrade
+# aiofiles below AstrBot's required version.

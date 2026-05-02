@@ -1,0 +1,15 @@
+name: al1s_setu
+display_name: Al1s Setu
+desc: 迁移自 botv1 的 setu 插件，保留原有命令触发方式与群级 R18 开关。
+help: |
+  /setu [标签/标签]
+  /色图 [标签/标签]
+  /setu开启r18
+  /色图开启r18
+  /setu关闭r18
+  /色图关闭r18
+version: v0.1.0
+author: makiiscoding
+support_platforms:
+  - aiocqhttp
+astrbot_version: '>=4.16,<5'

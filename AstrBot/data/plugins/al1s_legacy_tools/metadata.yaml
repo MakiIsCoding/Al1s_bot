@@ -1,0 +1,16 @@
+name: al1s_legacy_tools
+display_name: Al1s Legacy Tools
+desc: Migrated utility commands from botv1 NoneBot2 plugins.
+help: |
+  /dayanime
+  /今日动画
+  /今日新番
+  /图片超分
+  /翻译图片
+  /总结
+  @机器人 help
+version: v0.1.0
+author: makiiscoding
+support_platforms:
+  - aiocqhttp
+astrbot_version: ">=4.16,<5"

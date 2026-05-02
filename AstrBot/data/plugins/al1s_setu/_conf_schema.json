@@ -1,0 +1,38 @@
+{
+  "api_url": {
+    "description": "Setu API 地址",
+    "type": "string",
+    "default": "https://api.lolicon.app/setu/v2",
+    "hint": "默认使用 Lolicon Setu API，一般不需要修改。"
+  },
+  "max_api_retry": {
+    "description": "API 重试次数",
+    "type": "int",
+    "default": 5,
+    "hint": "请求或发送失败时的最大重试次数。"
+  },
+  "timeout_seconds": {
+    "description": "请求超时时间（秒）",
+    "type": "int",
+    "default": 60,
+    "hint": "图片接口请求和下载图片时使用的超时时间。"
+  },
+  "strict_tag_match": {
+    "description": "严格标签匹配",
+    "type": "bool",
+    "default": true,
+    "hint": "开启后，如果 API 返回图片的标签与请求标签明显不匹配，将自动重试而不是直接发图。"
+  },
+  "sensitive_r18_tags": {
+    "description": "敏感 R18 标签",
+    "type": "list",
+    "default": ["sm", "bdsm", "bondage", "拘束", "束缚", "绑缚", "調教", "调教"],
+    "hint": "这些标签在未开启 R18 时会直接提示，而不是返回跑偏图片。"
+  },
+  "r18_tag_whitelist_groups": {
+    "description": "R18 标签白名单群",
+    "type": "list",
+    "default": [],
+    "hint": "填入允许开启 R18 色图的群号列表，例如 [123456, 234567]。只有白名单内的群，setu开启r18 才会生效。"
+  }
+}

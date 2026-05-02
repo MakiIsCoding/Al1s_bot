@@ -4,10 +4,15 @@ AstrBot/.venv/
 AstrBot/__pycache__/
 AstrBot/**/*.pyc
 
-# AstrBot runtime data. Custom plugin source under data/plugins is allowed.
+# AstrBot runtime data. Keep runtime configs/data ignored, but allow migrated al1s plugin source.
 AstrBot/data/*
+!AstrBot/data/
 !AstrBot/data/plugins/
-!AstrBot/data/plugins/**
+AstrBot/data/plugins/*
+!AstrBot/data/plugins/al1s_*/
+!AstrBot/data/plugins/al1s_*/**
+AstrBot/data/plugins/**/__pycache__/
+AstrBot/data/plugins/**/*.pyc
 
 # Logs and transient files
 *.log
