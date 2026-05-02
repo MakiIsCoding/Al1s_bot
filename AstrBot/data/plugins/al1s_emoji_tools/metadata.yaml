@@ -1,0 +1,17 @@
+name: al1s_emoji_tools
+display_name: Al1s Emoji Tools
+desc: Migrated private superuser emoji collection and image emotion classification tools.
+help: |
+  /addimg
+  /endimg
+  /收集表情
+  /结束
+  /状态
+  /清理
+  /列表
+  /打标 [数量]
+version: v0.1.0
+author: makiiscoding
+support_platforms:
+  - aiocqhttp
+astrbot_version: ">=4.16,<5"

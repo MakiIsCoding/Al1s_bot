@@ -1,0 +1,80 @@
+{
+  "dayanime_daily_push_enabled": {
+    "description": "Enable daily anime push",
+    "type": "bool",
+    "default": true,
+    "hint": "Push today anime image to configured groups every day."
+  },
+  "dayanime_push_hour": {
+    "description": "Anime push hour",
+    "type": "int",
+    "default": 8,
+    "hint": "0-23."
+  },
+  "dayanime_push_minute": {
+    "description": "Anime push minute",
+    "type": "int",
+    "default": 0,
+    "hint": "0-59."
+  },
+  "dayanime_push_groups": {
+    "description": "Anime push group ids",
+    "type": "list",
+    "default": [653157263, 818151535, 783866104, 563173392],
+    "hint": "OneBot group ids."
+  },
+  "baidu_translate_app_id": {
+    "description": "Baidu image translate app id",
+    "type": "string",
+    "default": "",
+    "hint": "Runtime secret. Do not commit real value."
+  },
+  "baidu_translate_app_key": {
+    "description": "Baidu image translate app key",
+    "type": "string",
+    "default": "",
+    "hint": "Runtime secret. Do not commit real value."
+  },
+  "summary_api_base": {
+    "description": "Summary OpenAI-compatible base URL",
+    "type": "string",
+    "default": "https://api.deepseek.com/v1",
+    "hint": "OpenAI-compatible endpoint."
+  },
+  "summary_api_key": {
+    "description": "Summary API key",
+    "type": "string",
+    "default": "",
+    "hint": "Runtime secret. Do not commit real value."
+  },
+  "summary_model": {
+    "description": "Summary model",
+    "type": "string",
+    "default": "deepseek-chat",
+    "hint": "OpenAI-compatible chat model."
+  },
+  "summary_history_limit": {
+    "description": "Summary history limit",
+    "type": "int",
+    "default": 300,
+    "hint": "Max messages used by /summary."
+  },
+  "summary_timeout": {
+    "description": "Summary timeout seconds",
+    "type": "int",
+    "default": 60,
+    "hint": "API timeout."
+  },
+  "message_retention_days": {
+    "description": "Stored group message retention days",
+    "type": "int",
+    "default": 30,
+    "hint": "Local JSON history retention."
+  },
+  "image_cache_retention_days": {
+    "description": "Image cache retention days",
+    "type": "int",
+    "default": 3,
+    "hint": "Temp/cache cleanup threshold."
+  }
+}

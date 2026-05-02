@@ -1,0 +1,38 @@
+{
+  "superusers": {
+    "description": "Superuser ids",
+    "type": "list",
+    "default": ["2694958402", "2294900459"],
+    "hint": "Only these users can use private emoji tools."
+  },
+  "vision_api_base": {
+    "description": "OpenAI-compatible vision API base URL",
+    "type": "string",
+    "default": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "hint": "Used by addimg and /打标."
+  },
+  "vision_api_key": {
+    "description": "Vision API key",
+    "type": "string",
+    "default": "",
+    "hint": "Runtime secret. Do not commit real value."
+  },
+  "vision_model": {
+    "description": "Vision model",
+    "type": "string",
+    "default": "qwen-vl-plus",
+    "hint": "OpenAI-compatible vision model."
+  },
+  "max_emojis": {
+    "description": "Max stored emojis",
+    "type": "int",
+    "default": 200,
+    "hint": "Collector storage limit."
+  },
+  "expire_days": {
+    "description": "Emoji expire days",
+    "type": "int",
+    "default": 30,
+    "hint": "Used by /清理."
+  }
+}

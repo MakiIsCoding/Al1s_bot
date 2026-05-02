@@ -1,0 +1,62 @@
+{
+  "jmcomic_log": {
+    "description": "JMComic API 日志",
+    "type": "bool",
+    "default": true,
+    "hint": "是否启用 JMComic 请求日志。"
+  },
+  "jmcomic_proxies": {
+    "description": "代理配置",
+    "type": "string",
+    "default": "system",
+    "hint": "JMComic 请求代理配置，默认使用 system。"
+  },
+  "jmcomic_thread_count": {
+    "description": "下载线程数量",
+    "type": "int",
+    "default": 30,
+    "hint": "下载图片时使用的线程数量。"
+  },
+  "jmcomic_username": {
+    "description": "JM 登录用户名",
+    "type": "string",
+    "default": "",
+    "hint": "可选，配置后用于登录 JM。"
+  },
+  "jmcomic_password": {
+    "description": "JM 登录密码",
+    "type": "string",
+    "default": "",
+    "hint": "可选，配置后用于登录 JM。"
+  },
+  "jmcomic_allow_groups": {
+    "description": "默认启用所有群",
+    "type": "bool",
+    "default": false,
+    "hint": "是否默认允许所有群使用 JM 功能。"
+  },
+  "jmcomic_user_limits": {
+    "description": "每周下载限制",
+    "type": "int",
+    "default": 30,
+    "hint": "保留旧插件配置项，当前主要用于每周重置逻辑。"
+  },
+  "jmcomic_modify_real_md5": {
+    "description": "修改 PDF MD5",
+    "type": "bool",
+    "default": true,
+    "hint": "开启后会在上传前修改 PDF 文件 MD5。"
+  },
+  "jmcomic_blocked_message": {
+    "description": "屏蔽结果提示词",
+    "type": "string",
+    "default": "搜索到屏蔽本子",
+    "hint": "搜索命中屏蔽标签时，在合并转发里显示的提示内容。"
+  },
+  "jmcomic_results_per_page": {
+    "description": "每页搜索结果数量",
+    "type": "int",
+    "default": 5,
+    "hint": "jm搜索 / jm下一页 每页返回的结果数量。"
+  }
+}

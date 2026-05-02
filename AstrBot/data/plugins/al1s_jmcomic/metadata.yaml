@@ -1,0 +1,23 @@
+name: al1s_jmcomic
+display_name: Al1s JMComic
+desc: 迁移自 botv1 的 JMComic 搜索下载插件，保留原有命令与群管理能力。
+help: |
+  /jm下载 [jm号]
+  /jm查询 [jm号]
+  /jm搜索 [关键词]
+  /jm下一页
+  /jm设置文件夹 [文件夹名]
+  /jm拉黑 @用户
+  /jm解除拉黑 @用户
+  /jm黑名单
+  /jm启用群 [群号...]
+  /jm禁用群 [群号...]
+  /开启jm
+  /关闭jm
+  /jm禁用id [id...]
+  /jm禁用tag [tag...]
+version: v0.1.0
+author: makiiscoding
+support_platforms:
+  - aiocqhttp
+astrbot_version: ">=4.16,<5"
